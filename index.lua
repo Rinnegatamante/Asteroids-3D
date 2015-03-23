@@ -67,15 +67,18 @@ if restart == nil then
 	menu = {"Start game","Render: "..rtype,"Exit game"}
 	menu_x = {150,145,157}
 	menu_index = 1
-	logo = Screen.loadImage("/logo.png")
-	Screen.refresh()
-	Screen.drawImage(100,10,logo,TOP_SCREEN)
-	Screen.debugPrint(157,115,"Loading...",white,TOP_SCREEN)
-	Screen.flip()
-	Screen.waitVblankStart()
-	Sound.init()
-	snd = Sound.openOgg("/theme.ogg")
-	Sound.play(snd,LOOP,0x08,0x09)
+	if init == nil then
+		logo = Screen.loadImage("/logo.png")
+		Screen.refresh()
+		Screen.drawImage(100,10,logo,TOP_SCREEN)
+		Screen.debugPrint(157,115,"Loading...",white,TOP_SCREEN)
+		Screen.flip()
+		Screen.waitVblankStart()
+		Sound.init()
+		snd = Sound.openOgg("/theme.ogg")
+		Sound.play(snd,LOOP,0x08,0x09)
+		init = true
+	end
 end
 
 while (restart == nil) do
@@ -97,6 +100,9 @@ while (restart == nil) do
 		Graphics.termBlend()
 	else
 		Screen.drawImage(100,10,logo,TOP_SCREEN)
+		if Screen.get3DLevel() > 0 then
+			Screen.drawImage(100,10,logo,TOP_SCREEN,RIGHT_EYE)
+		end
 	end
 	
 	-- Generate background effect
@@ -124,6 +130,9 @@ while (restart == nil) do
 			color = white
 		end
 		Screen.debugPrint(menu_x[i],y,voice,color,TOP_SCREEN)
+		if Screen.get3DLevel() > 0 then
+			Screen.debugPrint(menu_x[i],y,voice,color,TOP_SCREEN,RIGHT_EYE)
+		end
 		y = y+15
 	end
 	
@@ -144,6 +153,10 @@ while (restart == nil) do
 			end
 			menu[2] = "Render: " .. rtype
 		else
+			Screen.freeImage(logo)
+			Sound.pause(snd)
+			Sound.close(snd)
+			Sound.term()
 			System.exit()
 		end
 	end
