@@ -79,6 +79,7 @@ if restart == nil then
 	menu_x = {150,145,157}
 	menu_index = 1
 	if init == nil then
+		System.setCpuSpeed(804)
 		logo = Screen.loadImage(System.currentDirectory().."/AsteroidsFiles/logo.png")
 		Screen.refresh()
 		Screen.drawImage(100,10,logo,TOP_SCREEN)
@@ -87,7 +88,7 @@ if restart == nil then
 		Screen.waitVblankStart()
 		Sound.init()
 		snd = Sound.openOgg(System.currentDirectory().."/AsteroidsFiles/theme.ogg")
-		Sound.play(snd,LOOP,0x08,0x09)
+		Sound.play(snd,LOOP)
 		init = true
 	end
 end
@@ -195,9 +196,9 @@ while (restart == nil) do
 		end
 	end
 	oldpad = pad
-	Screen.debugPrint(0,225,"v.0.5 ALPHA",white,TOP_SCREEN)
+	Screen.debugPrint(0,225,"v.0.5.1 ALPHA",white,TOP_SCREEN)
 	if Screen.get3DLevel() > 0 then
-		Screen.debugPrint(0,225,"v.0.5 ALPHA",white,TOP_SCREEN,RIGHT_EYE)
+		Screen.debugPrint(0,225,"v.0.5.1 ALPHA",white,TOP_SCREEN,RIGHT_EYE)
 	end
 	Screen.waitVblankStart()
 	Screen.flip()
@@ -577,9 +578,9 @@ while true do
 			autofire = false
 		end
 	end
-	Screen.debugPrint(0,225,"v.0.5 ALPHA",white,TOP_SCREEN)
+	Screen.debugPrint(0,225,"v.0.5.1 ALPHA",white,TOP_SCREEN)
 	if Screen.get3DLevel() > 0 then
-		Screen.debugPrint(0,225,"v.0.5 ALPHA",white,TOP_SCREEN,RIGHT_EYE)
+		Screen.debugPrint(0,225,"v.0.5.1 ALPHA",white,TOP_SCREEN,RIGHT_EYE)
 	end
 	--if Controls.check(pad,KEY_SELECT) and (not Controls.check(oldpad,KEY_SELECT)) then
 	--	if screen_idx == nil then
